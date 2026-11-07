@@ -45,6 +45,7 @@ html,body{height:100%;margin:0;background:var(--night);color:var(--text);font-fa
 .toast{background:var(--panel);border:2px solid var(--line);border-radius:4px;padding:9px 14px;font-weight:700;font-size:14px;max-width:min(92vw,480px);text-align:center;box-shadow:0 3px 0 rgba(0,0,0,.35);animation:tin .35s ease-out,tout .6s ease-in 4.2s forwards}
 .toast.gold{border-color:var(--gold);color:var(--gold)}
 .toast.rare{border-color:var(--lav);color:#e6dcff}
+.toast.note{animation:tin .35s ease-out,tout .7s ease-in 9s forwards;max-width:min(92vw,430px);font-weight:600;font-style:italic;border-color:#e8d6a8;color:#fff1cf;line-height:1.45;background:rgba(48,34,40,.9)}
 @keyframes tin{from{transform:translateY(-10px);opacity:0}to{transform:none;opacity:1}}
 @keyframes tout{to{opacity:0;transform:translateY(-6px)}}
 #prompt{position:absolute;left:0;right:0;bottom:max(14px,calc(env(safe-area-inset-bottom,0px) + 10px));text-align:center;font-weight:700;font-size:14px;text-shadow:0 2px 0 rgba(10,16,48,.8),0 0 12px rgba(10,16,48,.8);padding:0 16px;transition:opacity .4s}
@@ -149,6 +150,60 @@ input[type=range]{accent-color:var(--coral);width:min(220px,50vw)}
 .help{color:#e6dcff;font-size:13px;line-height:1.6}
 .help kbd{background:rgba(255,255,255,.1);border:2px solid var(--line);border-radius:4px;padding:0 6px;font:800 12px var(--ui)}
 @media (prefers-reduced-motion:reduce){.toast,#cardIn,#bangFx.on{animation-duration:.01s}}
+
+/* ===== Discrétion : l'interface se fond dans l'ambiance (teintes mises à jour selon l'heure) ===== */
+:root{--panel:rgba(12,18,52,.42);--line:rgba(255,240,220,.16);--sheet:rgba(14,20,58,.8)}
+#place{font-size:clamp(14px,1.8vw,18px);font-weight:700;letter-spacing:.06em;opacity:0;transition:opacity 1.4s;text-shadow:0 1px 10px rgba(8,12,40,.7)}
+#clock{font-size:12px;opacity:.55;gap:6px}#clock .ph{font-size:10px;color:var(--text);font-weight:600}
+#clockIcon{width:9px;height:9px;box-shadow:none!important}
+#topR{gap:2px}
+.ibtn{background:transparent;border:0;box-shadow:none;padding:9px;opacity:.55;border-radius:50%;filter:drop-shadow(0 1px 4px rgba(6,10,34,.7));transition:opacity .3s,background .3s}
+.ibtn span{display:none}
+.ibtn:hover,.ibtn:focus-visible{opacity:1;background:var(--panel);border:0}
+.ibtn:active{transform:none;box-shadow:none}
+.ibtn .dot{width:7px;height:7px;min-width:0;padding:0;top:4px;right:4px;font-size:0}
+#coins{background:transparent;border:0;box-shadow:none;padding:6px 10px;opacity:.75;font-weight:700;font-size:14px;text-shadow:0 1px 6px rgba(6,10,34,.8)}
+#coins svg{width:13px;height:13px}
+.toast{background:var(--panel);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:0;box-shadow:none;border-radius:18px;padding:7px 16px;font-weight:600;font-size:13px;animation:tin .5s ease-out,tout .8s ease-in 3.4s forwards;color:var(--text)}
+.toast.gold{color:#ffe2a8;border:0}.toast.rare{color:#e0d6ff;border:0}
+.toast.note{animation:tin .5s ease-out,tout .9s ease-in 8s forwards;border:0;color:#fff1d6;font-size:14px;padding:10px 18px;border-radius:14px}
+#prompt{font-size:13px;font-weight:600;opacity:.85}
+#prompt kbd{background:none;border:1px solid var(--line);border-radius:5px;padding:0 6px;font-weight:700;font-size:11px}
+#bangFx{font-size:clamp(40px,7vw,68px);text-shadow:0 2px 18px rgba(255,200,100,.6)}
+#reel{background:transparent;border:0;box-shadow:none;padding:0;width:min(300px,70vw)}
+#reel .lbl{font-size:11px;opacity:.75;margin-bottom:6px}#reel.quiet .lbl{display:none}
+#track{height:12px;background:rgba(10,16,48,.4);border:1px solid var(--line);border-radius:6px}
+#zone{border-left:1px solid var(--lagoon);border-right:1px solid var(--lagoon)}
+#cursor{width:6px;margin-left:-3px;border-radius:3px;box-shadow:0 0 8px var(--gold)}
+#prog{height:3px;border:0;margin-top:7px;background:rgba(255,255,255,.12);border-radius:2px}
+.tbtn{background:var(--panel);border:1px solid var(--line);box-shadow:none;opacity:.6;border-radius:50%}
+.tbtn.on{background:rgba(255,200,160,.25);border-color:var(--line)}
+#actBtn{width:76px;height:76px;background:rgba(255,170,120,.3);border:1px solid rgba(255,225,200,.5);box-shadow:none;color:var(--text);font-size:11px;font-weight:800;opacity:.85;letter-spacing:.06em}
+#actBtn.on{transform:scale(.95);background:rgba(255,170,120,.5);box-shadow:none}
+.btn{background:rgba(255,205,165,.14);color:var(--text);border:1px solid rgba(255,225,195,.4);box-shadow:none;border-radius:999px;font-weight:700;font-size:14px;letter-spacing:.06em;padding:11px 24px;text-transform:none;transition:background .3s}
+.btn:hover{background:rgba(255,205,165,.28);filter:none}.btn:active{transform:none;box-shadow:none}
+.btn.small{font-size:12px;padding:6px 14px;border-width:1px;box-shadow:none}.btn.ghost{font-size:13px;padding:8px 16px}
+.btn:disabled{opacity:.4;filter:none}
+#splash{background:radial-gradient(ellipse at 50% 70%,rgba(255,140,90,.12),rgba(10,16,48,.35) 70%)}
+#splash h1{font-weight:700;letter-spacing:.1em;text-shadow:0 2px 30px rgba(255,170,110,.55);font-size:clamp(34px,7.5vw,76px)}
+#splash p{font-size:clamp(13px,2vw,16px)}
+.modal{background:rgba(6,10,32,.4);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.sheet{background:var(--sheet);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 50px rgba(0,0,0,.35)}
+.sheet header{border-bottom:1px solid var(--line)}
+.sheet h2{font-size:18px;font-weight:700}
+.x{border:0;opacity:.6;border-radius:50%}.x:hover{opacity:1}
+.stat,.sp,.chal,.it,#detail{border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.03)}
+.stat b{font-size:17px}
+.sp:hover{border-color:rgba(255,235,210,.4)}
+.it.eq,.chal.done{border-color:rgba(255,215,140,.55)}
+.chal .bar,.it .sw{border:0}.chal .bar{height:5px;border-radius:3px;background:rgba(255,255,255,.1)}
+.tab{border:1px solid var(--line);border-radius:999px;font-weight:600;text-transform:none;letter-spacing:.03em;font-size:13px;padding:7px 14px}
+.tab.on{background:rgba(255,200,160,.18);border-color:rgba(255,220,190,.5)}
+h4{color:var(--dim);font-weight:700;letter-spacing:.14em;font-size:11px}
+#card{background:rgba(6,10,32,.3)}
+#cardIn{background:var(--sheet);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,225,175,.45);border-radius:16px;box-shadow:0 14px 50px rgba(0,0,0,.4)}
+.badge{border-radius:999px;font-size:10px;padding:4px 10px;font-weight:800}
+#cardIn h2{font-size:22px}
 </style>
 
 <div id="stage">
@@ -161,10 +216,10 @@ input[type=range]{accent-color:var(--coral);width:min(220px,50vw)}
     </div>
     <div id="topR">
       <div id="coins" title="Coquillages"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7 3 3 7 3 12c0 3 1.4 5.5 3.5 7L7 21h10l.5-2c2.1-1.5 3.500-4 3.500-7 0-5-4-9-9-9zm0 3c.6 0 1 .4 1 1v10h-2V7c0-.6.4-1 1-1zM7.500 8c.5-.2 1.100.1 1.300.600L10 17H8L6.900 9.300c-.1-.5.200-1 .600-1.300zm9 0c.4.3.7.800.600 1.300L16 17h-2l1.200-8.400c.2-.5.800-.800 1.300-.600z"/></svg><b id="coinN">0</b></div>
-      <button class="ibtn" id="bBook" aria-label="Carnet de pêche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 4h7a3 3 0 0 1 3 3v13a2.500 2.500 0 0 0-2.500-2.500H4zM20 4h-6M20 4v13.500h-5"/></svg><span>Carnet</span><i class="dot hide" id="dotBook"></i></button>
-      <button class="ibtn" id="bChal" aria-label="Défis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M6 21V4m0 0h11l-2.500 4L17 12H6"/></svg><span>Défis</span><i class="dot hide" id="dotChal"></i></button>
-      <button class="ibtn" id="bShop" aria-label="Atelier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3v4m-6 0h12M12 7v14M5 14c0 4 3 7 7 7s7-3 7-7"/></svg><span>Atelier</span></button>
-      <button class="ibtn" id="bSet" aria-label="Réglages et temps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3.200"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M19 5l-2 2M7 17l-2 2"/></svg><span>Réglages</span></button>
+      <button class="ibtn" id="bBook" aria-label="Carnet de pêche" title="Carnet de pêche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 4h7a3 3 0 0 1 3 3v13a2.500 2.500 0 0 0-2.500-2.500H4zM20 4h-6M20 4v13.500h-5"/></svg><span>Carnet</span><i class="dot hide" id="dotBook"></i></button>
+      <button class="ibtn" id="bChal" aria-label="Défis" title="Défis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M6 21V4m0 0h11l-2.500 4L17 12H6"/></svg><span>Défis</span><i class="dot hide" id="dotChal"></i></button>
+      <button class="ibtn" id="bShop" aria-label="Atelier" title="Atelier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3v4m-6 0h12M12 7v14M5 14c0 4 3 7 7 7s7-3 7-7"/></svg><span>Atelier</span></button>
+      <button class="ibtn" id="bSet" aria-label="Réglages et temps" title="Réglages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3.200"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M19 5l-2 2M7 17l-2 2"/></svg><span>Réglages</span></button>
     </div>
     <div id="toasts" aria-live="polite"></div>
     <div id="bangFx">!</div>
@@ -200,7 +255,7 @@ input[type=range]{accent-color:var(--coral);width:min(220px,50vw)}
   <div class="modal hide" id="m-book" role="dialog" aria-modal="true" aria-labelledby="h-book">
     <div class="sheet">
       <header><div><h2 id="h-book">Carnet de pêche</h2><div class="sub" id="bookSub"></div></div><button class="x" data-close aria-label="Fermer">✕</button></header>
-      <div class="body"><div class="stats" id="bookStats"></div><div class="grid" id="bookGrid"></div><div id="detail" class="hide"><canvas id="detCv" width="120" height="80"></canvas><div><h3 id="detName"></h3><div class="stars" id="detStars"></div><div id="detMeta" class="help"></div><p id="detFlavor"></p></div></div></div>
+      <div class="body"><div class="stats" id="bookStats"></div><div class="grid" id="bookGrid"></div><div id="detail" class="hide"><canvas id="detCv" width="120" height="80"></canvas><div><h3 id="detName"></h3><div class="stars" id="detStars"></div><div id="detMeta" class="help"></div><p id="detFlavor"></p></div></div><h4 id="msgH" style="margin-top:22px"></h4><div id="bookMsgs" class="help"></div></div>
     </div>
   </div>
 
@@ -236,11 +291,14 @@ input[type=range]{accent-color:var(--coral);width:min(220px,50vw)}
         </div>
         <div class="row2"><label>Écoulement</label>
           <div class="tabs" id="speedBtns" style="margin:0"><button class="tab" data-s="0">Figé</button><button class="tab" data-s="1">Calme</button><button class="tab" data-s="2">Rapide</button></div></div>
+        <h4>Photo</h4>
+        <div class="row2"><button class="btn ghost" id="bPhoto">Masquer l'interface</button><span class="help">Touche <kbd>H</kbd> ou un clic pour revenir.</span></div>
         <h4>Comment jouer</h4>
         <div class="help">
           <kbd>←</kbd> <kbd>→</kbd> (ou <kbd>Q</kbd> <kbd>D</kbd>) pour ramer. <kbd>↑</kbd> <kbd>↓</kbd> règlent la profondeur de l'hameçon.<br>
           <kbd>Espace</kbd> lance la ligne. Quand un poisson mord, le <b>!</b> apparaît : appuie de nouveau sur <kbd>Espace</kbd> pour ferrer.<br>
           Puis maintiens <kbd>Espace</kbd> pour enrouler : garde le curseur doré dans la zone turquoise. Le poisson ne s'échappe jamais.<br>
+          Tu peux aussi maintenir le clic ou le doigt à gauche ou à droite de la barque pour ramer. Des bouteilles flottent çà et là : approche-toi pour les ramasser.<br>
           Chaque espèce a ses heures, ses profondeurs et ses eaux préférées. Le carnet te donne des indices.
         </div>
         <h4>Sauvegarde</h4>
@@ -465,7 +523,7 @@ function sfx(name, p) {
 /* ============ Espèces ============ */
 /* b = poids par zone [lucioles, récif, large, algues, gouffre] ; d = profondeur [min,max] (fraction) ; t = poids [aube, jour, crépuscule, nuit] */
 const RAR = ['Courante', 'Peu commune', 'Rare', 'Très rare', 'Légendaire'];
-const RAR_W = [10, 5, 2.1, .75, .5];
+const RAR_W = [10, 5, 2.1, .75, .9];
 function SP(id, n, r, shape, L, H, col, p, b, d, t, s, k, spd, f, o) {
   const sp = Object.assign({ id, n, r, shape, L, H, p, b, d, t, s, k, spd, f, g: 0, school: 0, tailAcc: 0 }, o || {});
   sp.C = { back: hex(col[0]), body: hex(col[1]), belly: hex(col[2]), fin: hex(col[3]), acc: hex(col[4]) };
@@ -496,8 +554,8 @@ const SPECIES = [
   SP(21, 'Poisson-lanterne', 2, 'fus', 14, 6, ['101a38', '24407a', '5a8ad0', '1a2e60', '7affd8'], 'photo', [0, 0, 1, 0, 5], [.55, 1], [.5, 1, 1, 1], [8, 16], .012, 16, 'Des petites lanternes le long du ventre éclairent sa route.', { g: 2, gc: '7affd8' }),
   SP(22, 'Baudroie des abysses', 3, 'angler', 26, 20, ['1a1020', '3a2a48', '5a4a68', '2a1a38', 'ffe070'], 'none', [0, 0, 0, 0, 5], [.7, 1], [.4, .8, 1, 1], [30, 90], .03, 10, 'Elle pêche aussi, mais avec sa propre lanterne.', { g: 2, gc: 'ffe070' }),
   SP(23, 'Koï du crépuscule', 4, 'fus', 26, 11, ['ffb040', 'ffe6b0', 'fff6e0', 'ff8040', 'e84020'], 'koi', [5, 1, 0, 1, 0], [.2, .6], [0, 0, 3, 0], [50, 90], .02, 16, "Elle apparaît quand le ciel vire à l'orange, et seulement alors.", { g: 1, gc: 'ffc070' }),
-  SP(24, 'Poisson-aurore', 4, 'fus', 24, 10, ['ff7aa8', 'ffb0c8', 'fff0f4', 'ffd0e0', 'fff080'], 'gradient', [1, 2, 2, 1, 0], [.1, .5], [3, 0, 0, 0], [40, 80], .016, 16, "Né avec le soleil, il repart avec lui.", { g: 1, gc: 'ffc0d8' }),
-  SP(25, 'Poisson de lune', 4, 'fus', 24, 12, ['b0c8f0', 'e8f0ff', 'ffffff', 'c8d8f8', '7090e0'], 'stars', [1, 1, 1, 1, 3], [.15, .55], [0, 0, 0, 3], [40, 80], .017, 14, 'Un reflet de lune qui aurait appris à nager.', { g: 2, gc: 'b8d0ff' })
+  SP(24, 'Poisson-aurore', 4, 'fus', 24, 10, ['ff7aa8', 'ffb0c8', 'fff0f4', 'ffd0e0', 'fff080'], 'gradient', [3, 3, 3, 2, 0], [.1, .5], [3, 0, 0, 0], [40, 80], .016, 16, "Né avec le soleil, il repart avec lui.", { g: 1, gc: 'ffc0d8' }),
+  SP(25, 'Poisson de lune', 4, 'fus', 24, 12, ['b0c8f0', 'e8f0ff', 'ffffff', 'c8d8f8', '7090e0'], 'stars', [2, 2, 2, 2, 3], [.15, .55], [0, 0, 0, 3], [40, 80], .017, 14, 'Un reflet de lune qui aurait appris à nager.', { g: 2, gc: 'b8d0ff' })
 ];
 const SPR = {};
 const TIMEW = ['à l\'aube', 'en journée', 'au crépuscule', 'la nuit'];
@@ -889,7 +947,13 @@ function drawUnder() {
   // relief lointain
   const fc = mix(S.wBot, S.wTop, .22);
   for (let x = 0; x < W; x += 3) { const wf = wa + (x - W / 2) * 1.8, bp = bedFrac(wf) * D * .86 + Math.sin(wf * .05) * 3 - 6; if (bp < D) { const yy = Math.round(sy + bp); rect(x, yy, 3, H - yy, rgb(mul(fc, .55 + .45 * S.day))); } }
-  // décors lointains en silhouette (algues lointaines)
+  // petits bancs lointains
+  ctx.fillStyle = rgb(mix(S.wBot, S.wTop, .55 + .2 * S.day));
+  for (let i = 0; i < 22; i++) {
+    const dir = i % 2 ? 1 : -1, sp = 5 + hash(i) * 8, x = mod(i * 61 + G.time * sp * dir - wa * .5, W + 60) - 30, y = sy + 14 + hash(i * 3.3) * D * .55 + Math.sin(G.time * .7 + i) * 2;
+    if (y > sy + bedFrac(wa + (x - W / 2) * 1.8) * D * .86 - 8) continue;
+    ctx.globalAlpha = .45; ctx.fillRect(Math.round(x), Math.round(y), 4, 1); ctx.fillRect(Math.round(x + (dir > 0 ? -1 : 4)), Math.round(y - 1 + (i % 3 ? 0 : 1)), 1, 2); ctx.globalAlpha = 1;
+  }
   // fond marin
   for (let x = 0; x < W; x += 2) {
     const wx = wa + (x - W / 2), bp = bedPx(wx) + (hash(Math.floor(wx / 2)) - .5) * 1.6; if (bp >= D) continue;
@@ -945,6 +1009,7 @@ function drawBubbles() { for (const p of G.parts) if (p.k === 'bub') { const x =
 function drawFish() {
   const night = S.night;
   for (const f of G.fish) {
+    if (f.state === 'caught') continue;
     const rx = relX(f.x, G.cam); if (Math.abs(rx) > W / 2 + 60) continue;
     const spr = makeSprite(f.sp, f.len, (f.ph * 1.7 | 0) & 3), x = Math.round(W / 2 + rx), y = Math.round(sy + f.y + (f.sp.shape === 'jelly' ? Math.sin(G.time * 2 + f.id) * 2 : 0));
     ctx.save(); ctx.translate(x, y); if (f.dir > 0 && f.sp.shape !== 'jelly') ctx.scale(-1, 1);
@@ -972,10 +1037,10 @@ function drawGrade() {
 }
 /* ============ Sauvegarde ============ */
 const SAVE_KEY = 'horizon-doux-v1';
-const DEF_SAVE = () => ({ coins: 0, caught: {}, total: 0, bestLen: 0, t: .70, days: 1, boat: { hull: 0, flag: 0, lantern: 0, hat: 0 }, own: { hull: [0], flag: [0], lantern: [0], hat: [0] }, up: { line: 0, bait: 0, reel: 0 }, chal: [], chalDone: 0, pages: 0, spd: 1, vol: { music: .7, sfx: .8, amb: .7 }, x: 330 });
+const DEF_SAVE = () => ({ coins: 0, caught: {}, total: 0, bestLen: 0, t: .70, days: 1, boat: { hull: 0, flag: 0, lantern: 0, hat: 0 }, own: { hull: [0], flag: [0], lantern: [0], hat: [0] }, up: { line: 0, bait: 0, reel: 0 }, chal: [], chalDone: 0, pages: 0, msgs: [], tut: { cast: 0, strike: 0, reel: 0, depth: 0, move: 0 }, spd: 1, vol: { music: .7, sfx: .8, amb: .7 }, x: 330 });
 let SV = DEF_SAVE();
 function loadSave() {
-  try { const raw = localStorage.getItem(SAVE_KEY); if (raw) { const o = JSON.parse(raw), d = DEF_SAVE(); SV = Object.assign(d, o); SV.boat = Object.assign(d.boat, o.boat); SV.up = Object.assign(d.up, o.up); SV.own = Object.assign(d.own, o.own); SV.vol = Object.assign(d.vol, o.vol); } } catch (e) { }
+  try { const raw = localStorage.getItem(SAVE_KEY); if (raw) { const o = JSON.parse(raw), d = DEF_SAVE(); SV = Object.assign(d, o); SV.boat = Object.assign(d.boat, o.boat); SV.up = Object.assign(d.up, o.up); SV.own = Object.assign(d.own, o.own); SV.vol = Object.assign(d.vol, o.vol); SV.tut = Object.assign(d.tut, o.tut); } } catch (e) { }
 }
 let saveDirty = false;
 function save() { saveDirty = true; }
@@ -1035,7 +1100,7 @@ function maxDepth() { return Math.min(D * maxDepthFrac(), bedPx(Ln.hx) - 4, D - 
 
 function castLine() {
   if (Ln.state !== 'stowed') return;
-  Ln.state = 'out'; Ln.bx = B.x + B.dir * 38; Ln.hx = Ln.bx; Ln.depth = 3; Ln.fish = null; Ln.nibT = 0; Ln.bang = false; Ln.dip = 0;
+  SV.tut.cast++; Ln.state = 'out'; Ln.bx = B.x + B.dir * 38; Ln.hx = Ln.bx; Ln.depth = 3; Ln.fish = null; Ln.nibT = 0; Ln.bang = false; Ln.dip = 0;
   if (Ln.target > maxDepth()) Ln.target = maxDepth();
   sfx('cast'); setTimeout(() => sfx('splash'), 260); splash(Ln.bx, .8);
   setPrompt();
@@ -1047,7 +1112,7 @@ function retractLine(silent) {
 function strike() {
   const f = Ln.fish; if (!f) return;
   if (f.state === 'bite') {
-    f.state = 'hooked'; Ln.state = 'reel'; Ln.bang = false; setBang(false); sfx('hook'); splash(Ln.hx, 1);
+    SV.tut.strike++; f.state = 'hooked'; Ln.state = 'reel'; Ln.bang = false; setBang(false); sfx('hook'); splash(Ln.hx, 1);
     const r = f.sp.r, up = SV.up.reel;
     Ln.R = { prog: 0, cur: .35, vel: 0, ph: Math.random() * 6, zw: clamp(.21 - r * .022 + up * .03, .1, .3), spd: .62 + r * .12, k: .17 + up * .02 - r * .01, last: 0, y0: Ln.depth, x0: f.x, tick: 0 };
     $('#reel').classList.remove('hide'); setPrompt();
@@ -1061,7 +1126,7 @@ function updateLine(dt) {
   if (Ln.state === 'out') {
     Ln.bx += (B.x + B.dir * 38 - Ln.bx) * Math.min(1, dt * 1.2); Ln.hx += (Ln.bx - Ln.hx) * Math.min(1, dt * 1.5);
     const md = Math.max(8, maxDepth()); if (Ln.target > md) Ln.target = md;
-    const up = (K.up ? -1 : 0) + (K.down ? 1 : 0); Ln.target = clamp(Ln.target + up * 46 * dt, 8, md);
+    const up = (K.up ? -1 : 0) + (K.down ? 1 : 0); if (up) SV.tut.depth += dt; Ln.target = clamp(Ln.target + up * 46 * dt, 8, md);
     Ln.depth += clamp(Ln.target - Ln.depth, -60 * dt, 52 * dt);
     Ln.dip += ((Ln.fish && Ln.fish.state === 'bite' ? 4 : Ln.nibT > 0 ? 1.4 * Math.max(0, Math.sin(T * 14)) : 0) - Ln.dip) * Math.min(1, dt * 10);
     if (Ln.fish) {
@@ -1143,6 +1208,7 @@ function updateFish(dt) {
       if (d < R) { f.int += dt * (1 + SV.up.bait * .3); if (f.int > f.need) { f.state = 'approach'; Ln.fish = f; f.int = 0; } } else f.int = Math.max(0, f.int - dt);
     }
     if (g && f.state === 'wander' && Ln.state === 'out' && !Ln.fish && f.cool <= 0) { const dx = relX(Ln.hx, f.x), dy = hookY() - f.y; if (Math.hypot(dx, dy) < 24 * (1 + SV.up.bait * .3)) { f.int += dt; if (f.int > f.need) { f.grp = null; f.state = 'approach'; Ln.fish = f; f.int = 0; } } }
+    if (sp.r === 4 && f.state !== 'fade' && Math.random() < dt * 7) { const rx = relX(f.x, G.cam); if (Math.abs(rx) < W / 2) G.parts.push({ k: 'spark', x: W / 2 + rx + rnd(-f.len / 2, f.len / 2), y: sy + f.y + rnd(-6, 6), vx: rnd(-4, 4), vy: rnd(-12, -3), life: rnd(.6, 1.1) }); }
     if (Math.abs(relX(f.x, G.cam)) > W / 2 + 330 && f.state !== 'approach') G.fish.splice(i, 1);
   }
 }
@@ -1167,7 +1233,7 @@ function finishCatch(f) {
   const gain = [2, 4, 9, 18, 45][sp.r] + (rr > .8 ? 2 : 0) + (isNew ? 5 : 0) + (isRec ? 3 : 0);
   const r2 = SV.caught[sp.id] = rec || { n: 0, best: 0, bestW: 0, day: G.days };
   r2.n++; if (f.cm > r2.best) { r2.best = f.cm; r2.bestW = w; }
-  SV.total++; SV.coins += gain; if (f.cm > SV.bestLen) SV.bestLen = f.cm;
+  SV.tut.reel++; SV.total++; SV.coins += gain; if (f.cm > SV.bestLen) SV.bestLen = f.cm;
   catchInfo = { f, isNew, isRec, gain, w };
   const nSp = Object.keys(SV.caught).length;
   updateChallenges({ sp, cm: f.cm, isNew, depth: f.y0d || 0, bio: G.biome, phase: S.phase });
@@ -1211,6 +1277,48 @@ function updateChallenges(e) {
   renderChal();
 }
 
+/* ============ Bouteilles à la mer ============ */
+const MSGS = [
+  "Le soleil ne se couche jamais vraiment. Il laisse juste la place aux étoiles.",
+  "Les poissons-clowns adorent le récif. Les lucioles, elles, préfèrent la baie.",
+  "On raconte qu'une koï dorée apparaît quand le ciel devient orange, près de l'île.",
+  "Un poisson d'argent, reflet de la lune, ne sort qu'au cœur de la nuit.",
+  "Pêcher, c'est surtout apprendre à attendre. Et à regarder.",
+  "Au loin, le phare veille. Il ne dort jamais.",
+  "La forêt d'algues cache des rougets, des poissons-flûtes… et beaucoup de silence.",
+  "Dans le gouffre bleu, certains poissons emportent leur propre lanterne.",
+  "Il paraît qu'à l'aube, un poisson rose et or suit la première lumière.",
+  "Prends ton temps. L'océan en a pour tout le monde.",
+  "Une barque, une ligne, un horizon. Que demander de plus ?",
+  "Les méduses ne vont nulle part, et elles y arrivent très bien.",
+  "Si tu entends un chant grave au crépuscule, regarde l'horizon.",
+  "Le récif aime les couleurs. Les raies manta préfèrent le large.",
+  "Chaque poisson relâché reviendra peut-être te dire bonjour.",
+  "Un bon pêcheur sait quand ne rien faire.",
+  "Les étoiles filantes se montrent aux patients.",
+  "Le requin dormeur ne mord pas. Il rêve, simplement.",
+  "Laisse la lanterne allumée : la nuit, elle attire les curieux.",
+  "Cette bouteille a voyagé longtemps. Merci de l'avoir ouverte.",
+  "La mer garde tous ses secrets, mais elle en prête quelques-uns.",
+  "Le bar tacheté préfère le crépuscule. Il est très ponctuel.",
+  "Même sous la pluie, l'eau reste douce. Attends l'arc-en-ciel.",
+  "N'oublie pas de lever les yeux : le ciel change à chaque minute."
+];
+G.bottles = []; let bottleT = 3;
+function updateBottles(dt) {
+  bottleT -= dt;
+  if (G.bottles.length < 3 && bottleT <= 0) { bottleT = rnd(25, 55); G.bottles.push({ x: mod(B.x + (Math.random() < .5 ? -1 : 1) * rnd(220, 900), WORLD), ph: Math.random() * 6 }); }
+  for (let i = G.bottles.length - 1; i >= 0; i--) {
+    const b = G.bottles[i]; b.x = mod(b.x + Math.sin(G.time * .2 + b.ph) * 2 * dt, WORLD);
+    if (Math.abs(relX(b.x, B.x)) < 24 && Ln.state !== 'reel' && Ln.state !== 'landing') {
+      G.bottles.splice(i, 1);
+      const unseen = MSGS.map((m, k) => k).filter(k => !SV.msgs.includes(k)), fresh = unseen.length > 0, k = fresh ? pick(unseen) : (Math.random() * MSGS.length | 0), gain = fresh ? 6 + (Math.random() * 7 | 0) : 3;
+      if (fresh) SV.msgs.push(k); SV.coins += gain; save(); updateHud(); sfx('catch'); splash(b.x, .6);
+      for (let j = 0; j < 14; j++) G.parts.push({ k: 'spark', x: W / 2 + relX(b.x, G.cam) + rnd(-6, 6), y: sy - rnd(2, 12), vx: rnd(-14, 14), vy: -rnd(8, 26), life: rnd(.7, 1.3) });
+      toast('« ' + MSGS[k] + ' »', 'note', 10000); setTimeout(() => toast('Message de la bouteille · +' + gain + ' coquillages', 'gold'), 600);
+    }
+  }
+}
 /* ============ Événements d'ambiance ============ */
 G.dol = []; G.whale = null; let evT = 25;
 function updateEvents(dt) {
@@ -1230,7 +1338,8 @@ function updateEvents(dt) {
   if (G.whale) { G.whale.t += dt; if (G.whale.t > 9) G.whale = null; }
 }
 /* ============ Entrées ============ */
-const K = { left: false, right: false, up: false, down: false, act: false };
+const K = { left: false, right: false, up: false, down: false, act: false, pl: false, pr: false };
+let PHOTO = false;
 let RUN = false;
 const UI = { modal: null, card: false, newBook: false, chalDot: false };
 const COARSE = matchMedia('(pointer:coarse)').matches;
@@ -1252,6 +1361,8 @@ function actDown() {
 addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   const c = e.code;
+  if (c === 'KeyH') { if (!UI.modal && RUN) { photoMode(!PHOTO); e.preventDefault(); } return; }
+  if (PHOTO && c === 'Escape') { photoMode(false); return; }
   if (c === 'Escape') { if (UI.modal) closeModal(); return; }
   if (UI.modal) return;
   if (c === 'ArrowLeft' || c === 'KeyA') K.left = true; else if (c === 'ArrowRight' || c === 'KeyD') K.right = true;
@@ -1277,25 +1388,40 @@ $('#actBtn').addEventListener('pointerdown', e => { e.preventDefault(); onAct(tr
 if (COARSE) document.body.classList.add('coarse');
 
 /* ============ Interface ============ */
-function toast(msg, cls) {
+function toast(msg, cls, ms) {
   const d = document.createElement('div'); d.className = 'toast' + (cls ? ' ' + cls : ''); d.textContent = msg; $('#toasts').appendChild(d);
-  while ($('#toasts').children.length > 3) $('#toasts').firstChild.remove(); setTimeout(() => d.remove(), 5000);
+  while ($('#toasts').children.length > 3) $('#toasts').firstChild.remove(); setTimeout(() => d.remove(), ms || 5000);
+}
+let placeT = 0;
+function showPlace(delay) { const p = $('#place'); p.style.opacity = 0; clearTimeout(placeT); placeT = setTimeout(() => { p.textContent = BIOMES[G.biome].name; p.style.opacity = 1; placeT = setTimeout(() => { p.style.opacity = 0; }, 4500); }, delay || 0); }
+function tint() {
+  const r = document.documentElement.style, p = mul(mix(S.top, S.wBot, .55), .55), l = mix(S.hor, [255, 245, 230], .5), sh = mul(mix(S.top, S.wBot, .5), .45);
+  r.setProperty('--panel', rgb(p, .42)); r.setProperty('--line', rgb(l, .2)); r.setProperty('--sheet', rgb(sh, .82));
+}
+function photoMode(on) { PHOTO = on; $('#hud').classList.toggle('hide', on); if (on) closeModal(true); }
+$('#bPhoto').onclick = () => { closeModal(true); photoMode(true); };
+// ramer en maintenant le doigt ou la souris à gauche / droite de la barque
+let ptrOn = false;
+function ptrApply(e) { const r = cv.getBoundingClientRect(), sx = (e.clientX - r.left) / r.width * W, bx = boatScreenX(); K.pl = sx < bx - 26; K.pr = sx > bx + 26; }
+function ptrInit() {
+  cv.addEventListener('pointerdown', e => { if (PHOTO) { photoMode(false); return; } if (anyOverlay()) return; ptrOn = true; try { cv.setPointerCapture(e.pointerId); } catch (x) { } ptrApply(e); });
+  cv.addEventListener('pointermove', e => { if (ptrOn) ptrApply(e); });
+  ['pointerup', 'pointercancel'].forEach(t => cv.addEventListener(t, () => { ptrOn = false; K.pl = K.pr = false; }));
 }
 function setBang(on) { $('#bangFx').classList.toggle('on', on); }
 const kb = t => '<kbd>' + t + '</kbd>';
 let lastPrompt = '';
 function setPrompt() {
-  let p, b = 'PÊCHER';
-  const f = Ln.fish;
-  if (Ln.state === 'stowed') { p = COARSE ? 'Touche PÊCHER pour lancer la ligne' : kb('Espace') + ' lancer la ligne &nbsp;·&nbsp; ' + kb('←') + kb('→') + ' ramer'; b = 'PÊCHER'; }
+  let p = '', b = 'PÊCHER'; const f = Ln.fish, T = SV.tut;
+  if (Ln.state === 'stowed') { b = 'PÊCHER'; if (T.cast < 2) p = COARSE ? 'Touche pour lancer la ligne' : kb('Espace') + ' lancer la ligne'; else if (T.move < 4) p = COARSE ? '' : kb('←') + kb('→') + ' ramer'; }
   else if (Ln.state === 'out') {
-    if (f && f.state === 'bite') { p = COARSE ? 'Touche vite !' : kb('Espace') + ' maintenant !'; b = 'FERRER !'; }
-    else if (f) { p = 'Doucement… quelque chose rôde'; b = 'ATTENDRE'; }
-    else { p = COARSE ? 'Cherche un poisson · ▲▼ profondeur' : kb('↑') + kb('↓') + ' profondeur &nbsp;·&nbsp; ' + kb('Espace') + ' remonter'; b = 'REMONTER'; }
-  } else if (Ln.state === 'reel') { p = COARSE ? 'Maintiens ENROULER' : 'Maintiens ' + kb('Espace') + ' pour enrouler'; b = 'ENROULER'; }
-  else { p = ''; b = '…'; }
+    if (f && f.state === 'bite') { b = 'FERRER'; if (T.strike < 2) p = COARSE ? 'Maintenant !' : kb('Espace') + ' maintenant'; }
+    else if (f) { b = 'ATTENDRE'; if (T.strike < 2) p = 'Doucement… quelque chose rôde'; }
+    else { b = 'REMONTER'; if (T.depth < 1.5) p = COARSE ? '▲ ▼ profondeur' : kb('↑') + kb('↓') + ' profondeur'; else if (T.cast < 3) p = COARSE ? '' : kb('Espace') + ' remonter'; }
+  } else if (Ln.state === 'reel') { b = 'ENROULER'; if (T.reel < 2) p = COARSE ? 'Maintiens pour enrouler' : 'Maintiens ' + kb('Espace'); }
+  else b = '…';
   if (p !== lastPrompt) { lastPrompt = p; $('#prompt').innerHTML = p; }
-  $('#actBtn').textContent = b;
+  $('#actBtn').textContent = b; $('#reel').classList.toggle('quiet', T.reel >= 2);
 }
 function fmtClock(t) { const h = Math.floor(t * 24), m = Math.floor((t * 24 - h) * 60); return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0'); }
 function updateHud() {
@@ -1315,6 +1441,8 @@ function renderBook() {
   const n = Object.keys(SV.caught).length;
   $('#bookSub').textContent = titleFor(n);
   $('#bookStats').innerHTML = '<div class="stat"><b>' + n + ' / ' + SPECIES.length + '</b><small>Espèces</small></div><div class="stat"><b>' + SV.total + '</b><small>Prises</small></div><div class="stat"><b>' + (SV.bestLen ? fmtL(SV.bestLen) : '—') + '</b><small>Plus grand</small></div><div class="stat"><b>' + SV.pages + '</b><small>Pages</small></div>';
+  $('#msgH').textContent = 'Messages en bouteille (' + SV.msgs.length + ' / ' + MSGS.length + ')';
+  $('#bookMsgs').innerHTML = SV.msgs.length ? SV.msgs.map(k => '<div style="margin:0 0 8px;font-style:italic">« ' + MSGS[k] + ' »</div>').join('') : 'Aucune bouteille ramassée pour l\'instant. Elles flottent sur l\'eau, cherche leur reflet.';
   const g = $('#bookGrid'); g.innerHTML = '';
   SPECIES.forEach(sp => {
     const rec = SV.caught[sp.id], b = document.createElement('button'); b.className = 'sp' + (rec ? ' got' : ' unk') + (sp.r === 4 ? ' leg' : '');
@@ -1397,13 +1525,14 @@ function update(dt) {
   const mult = [0, 1, 6][SV.spd] || 1; const prev = G.t; G.t += dt * mult / 420; if (G.t >= 1) { G.t -= 1; G.days++; }
   computeSky(G.t); pal();
   // bateau
-  const open = anyOverlay(); let mv = (K.right ? 1 : 0) - (K.left ? 1 : 0); if (open || Ln.state === 'reel' || Ln.state === 'landing') mv = 0;
-  B.mv = mv; B.v += (mv * 36 - B.v) * Math.min(1, dt * 1.6); B.x = mod(B.x + B.v * dt, WORLD);
+  const open = anyOverlay(); let mv = (K.right || K.pr ? 1 : 0) - (K.left || K.pl ? 1 : 0); if (open || Ln.state === 'reel' || Ln.state === 'landing') mv = 0;
+  if (mv) SV.tut.move += dt; B.mv = mv; B.v += (mv * 36 - B.v) * Math.min(1, dt * 1.6); B.x = mod(B.x + B.v * dt, WORLD);
   if (mv !== 0 && Ln.state === 'stowed') B.dir = mv;
   B.bob = Math.sin(G.time * 1.3) * 1.1 + Math.sin(G.time * 2.3 + 1) * .5; B.tilt = Math.sin(G.time * .9) * 1.1 + B.v * .03;
   G.cam = mod(G.cam + relX(B.x, G.cam) * Math.min(1, dt * 3.2), WORLD);
-  const bio = biomeAt(B.x); if (bio !== G.biome) { G.biome = bio; const p = $('#place'); p.style.opacity = 0; setTimeout(() => { p.textContent = BIOMES[bio].name; p.style.opacity = 1; }, 400); }
-  updateLine(dt); updateFish(dt); updateEvents(dt);
+  const bio = biomeAt(B.x); if (bio !== G.biome) { G.biome = bio; showPlace(1400); }
+  updateLine(dt); updateFish(dt); updateEvents(dt); if (RUN) updateBottles(dt);
+  if (RUN && S.phase !== G.lastPhase) { const first = G.lastPhase === undefined; G.lastPhase = S.phase; setTimeout(() => legendHint(S.phase), first ? 6000 : 800); }
   if (G.catchAnim) G.catchAnim.t += dt;
   // vague d'étrave
   wakeT -= dt; if (Math.abs(B.v) > 10 && wakeT <= 0) { wakeT = .5; G.rip.push({ x: B.x - B.dir * 28, r: 2, max: 12, life: 1 }); } else if (wakeT <= 0 && Math.random() < .004) { G.rip.push({ x: B.x + rnd(-24, 24), r: 1, max: 10, life: 1 }); }
@@ -1417,8 +1546,18 @@ function update(dt) {
   }
   if (G.parts.length > 260) G.parts.splice(0, G.parts.length - 260);
   for (let i = G.rip.length - 1; i >= 0; i--) { const r = G.rip[i]; r.r += dt * 9; r.life -= dt * .8; if (r.life <= 0 || r.r > r.max) G.rip.splice(i, 1); }
-  clockT -= dt; if (clockT <= 0) { clockT = .5; updateHud(); setPrompt(); }
+  clockT -= dt; if (clockT <= 0) { clockT = .5; updateHud(); setPrompt() }
   saveT -= dt; if (saveT <= 0) { saveT = 4; flushSave(); }
+}
+const LEG_HINT = { 23: "Le ciel s'embrase… une koï dorée rôde peut-être près de l'île.", 24: "L'aube se lève… un poisson rose et or suit la première lumière.", 25: 'La nuit est claire… un reflet de lune nage quelque part.' };
+function legendHint(ph) { SPECIES.forEach(sp => { if (sp.r === 4 && sp.t[ph] > 0 && !SV.caught[sp.id] && S.phase === ph) toast(LEG_HINT[sp.id], 'rare'); }); }
+function drawBottles() {
+  for (const b of G.bottles) {
+    const rx = relX(b.x, G.cam); if (Math.abs(rx) > W / 2 + 20) continue; const x = Math.round(W / 2 + rx), y = Math.round(sy - 3 + Math.sin(G.time * 1.6 + b.ph) * 1.2), tl = Math.sin(G.time * 1.1 + b.ph) > 0 ? 1 : 0;
+    rect(x - 3, y - 1 + tl, 7, 3, 'rgba(180,235,230,.85)'); rect(x - 2, y - 2 + tl, 5, 1, 'rgba(210,250,245,.9)'); rect(x + 4, y - 1 + tl, 1, 2, 'rgb(150,100,60)'); rect(x - 1, y - 1 + tl, 3, 2, 'rgb(250,236,200)'); rect(x - 3, y + 2, 7, 1, 'rgba(255,255,255,.35)');
+    G.glows.push([x, y, 14, [200, 255, 240], .22 + .12 * Math.sin(G.time * 3 + b.ph)]);
+    if (Math.sin(G.time * 2.2 + b.ph * 2) > .93) rect(x - 1, y - 4, 1, 3, 'rgba(255,255,255,.9)');
+  }
 }
 function drawBoat() {
   const spr = makeBoat(), x = boatScreenX(), y = boatY();
@@ -1489,13 +1628,14 @@ function drawCatchAnim() {
 }
 function drawParts() {
   for (const p of G.parts) if (p.k === 'drop') { const x = Math.round(W / 2 + relX(p.x, G.cam)); rect(x, Math.round(p.y), 1, 1, 'rgba(235,248,255,' + clamp(p.life * 2, 0, .9) + ')'); }
+  for (const p of G.parts) if (p.k === 'spark') { const a = clamp(p.life * 1.6, 0, 1), x = Math.round(p.x), y = Math.round(p.y); ctx.fillStyle = 'rgba(255,240,180,' + a + ')'; ctx.fillRect(x, y, 1, 1); if (p.life > .5) { ctx.fillRect(x - 1, y, 3, 1); ctx.fillRect(x, y - 1, 1, 3); } }
   for (const r of G.rip) ring(W / 2 + relX(r.x, G.cam), sy - 1, r.r, r.r * .22, 'rgba(255,255,255,' + (clamp(r.life, 0, 1) * .55) + ')');
 }
 function render() {
   drawSky(); drawSurface(); drawIsland(); drawEventsBehind(); drawUnder(); drawMotes(); drawFish();
   // assombrissement avec la profondeur
   for (let y = sy; y < H; y += 4) { const k = (y - sy) / D; ctx.fillStyle = 'rgba(2,8,30,' + (clamp(k, 0, 1) * .42 * (.6 + .4 * S.day) + S.night * .08) + ')'; ctx.fillRect(0, y, W, 4); }
-  drawBubbles(); drawBoat(); drawFrontWater(); drawLine(); drawCatchAnim(); drawParts(); drawGlows(); drawRain(); drawGrade();
+  drawBubbles(); drawBoat(); drawBottles(); drawFrontWater(); drawLine(); drawCatchAnim(); drawParts(); drawGlows(); drawRain(); drawGrade();
 }
 function frame(ts) {
   requestAnimationFrame(frame); const dt = Math.min(.05, (ts - lastTs) / 1000 || 0); lastTs = ts;
@@ -1506,10 +1646,11 @@ function frame(ts) {
 function boot() {
   cv = $('#cv'); ctx = cv.getContext('2d'); loadSave(); G.t = SV.t; G.days = SV.days; B.x = SV.x; G.cam = B.x; G.biome = biomeAt(B.x);
   A.vol = Object.assign({}, SV.vol); ensureChallenges(); layout(); addEventListener('resize', layout);
-  $('#place').textContent = BIOMES[G.biome].name; computeSky(G.t); for (let i = 0; i < 12; i++) spawnFish(); G.fish.forEach(f => f.x = mod(B.x + rnd(-W, W) * .8, WORLD));
+  computeSky(G.t); for (let i = 0; i < 12; i++) spawnFish(); G.fish.forEach(f => f.x = mod(B.x + rnd(-W, W) * .8, WORLD));
   setPrompt(); updateHud(); renderChal();
-  $('#goBtn').onclick = () => { initAudio(); setVolumes(); RUN = true; $('#splash').style.opacity = 0; setTimeout(() => $('#splash').classList.add('hide'), 1200); setTimeout(() => toast('Bienvenue. Aucune pression, aucun chrono.'), 1200); };
+  $('#goBtn').onclick = () => { initAudio(); setVolumes(); RUN = true; $('#splash').style.opacity = 0; setTimeout(() => $('#splash').classList.add('hide'), 1200); showPlace(1500); };
   setInterval(musicTick, 400);
+  ptrInit();
   addEventListener('beforeunload', () => { saveDirty = true; flushSave(); }); document.addEventListener('visibilitychange', () => { if (document.hidden) { saveDirty = true; flushSave(); } });
   requestAnimationFrame(frame);
 }
